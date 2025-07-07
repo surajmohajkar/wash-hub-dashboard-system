@@ -129,6 +129,14 @@ export const useUserBookings = (userId: string, page = 1, limit = 10) => {
   });
 };
 
+export const useWasherBookings = (washerId: string, page = 1, limit = 10) => {
+  return useQuery({
+    queryKey: [...queryKeys.washerBookings(washerId), page, limit],
+    queryFn: () => apiService.getWasherBookings(washerId, page, limit),
+    enabled: !!washerId,
+  });
+};
+
 export const useCreateBooking = () => {
   const queryClient = useQueryClient();
   const { toast } = useToast();
